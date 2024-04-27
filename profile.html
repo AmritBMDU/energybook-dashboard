@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet"
+            href="https://cdn.datatables.net/2.0.4/css/dataTables.dataTables.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script
+            src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
+
+        <style>
+        /* .show{
+            width: 600px !important;
+            z-index: 999;
+            box-shadow: 8px 6px 7px rgba(0, 0, 0, 0.3);
+            align-items: center;
+        } */
+        div.dt-container {
+            width: 1250px;
+            margin: 0 auto;
+        }
+
+        table {
+            background: white;
+        }
+
+        .heading {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 12px;
+            background-color: rgb(4, 4, 82);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-radius: 7px;
+            color: white;
+            float: right;
+        }
+
+        button:hover {
+            background-color: #070736;
+        }
+
+        /* table{
+            background: #000;
+        } */
+        th,
+        tr {
+            font-family: 'Poppins', sans-serif !important;
+            text-align: center !important;
+        }
+
+        td {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            min-width: 300px;
+            width: 50%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .close {
+            color: black;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Styles for button */
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Other styles */
+        .row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .col-auto {
+            margin-left: auto;
+        }
+        .bluish-color {
+    color: #4d7fff; /* Bluish color */
+}
+
+.black-color {
+    color: #000; /* Black color */
+}
+
+.filter-label, .search-label {
+    color: yellow; /* Yellow color */
+}
+    </style>
+    </head>
+
+    <body>
+        <h2
+            style="font-family: 'Poppins',sans-serif; font-weight: 600; color: blue;"
+            class="text-center heading">
+            User Profile</h2>
+        <div class="col-md-3">
+            <!-- Filter by date -->
+            <label for="dateFilter" class="filter-label"
+                style="font-family: 'Poppins',sans-serif;font-weight: 550;margin-left: 125px;">Filter
+                by Date:</label>
+            <input type="date" id="dateFilter" class="form-control">
+        </div>
+        <!-- table start -->
+        <table id="example" class="display nowrap">
+            <thead>
+                <tr>
+                    <th class="bluish-color">SR No</th>
+                    <th class="bluish-color">Created Date
+                    </th>
+                    <th class="bluish-color">CIN No</th>
+                    <th class="bluish-color">Name</th>
+                    <th class="bluish-color">Phone No.</th>
+                    <th class="bluish-color">Email Id</th>
+                    <th class="bluish-color">Category</th>
+                    <th class="bluish-color">Pin code</th>
+                    <th class="bluish-color">State</th>
+                    <th class="bluish-color">City</th>
+                    <th class="bluish-color">Address</th>
+                    <th class="bluish-color">Location Coordinates</th>
+                    <th class="bluish-color">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr> <td>1</td>
+                    <td>2024-04-27</td>
+                    <td>ABC1234567</td>
+                    <td>Nehal Doe</td>
+                    <td>1234567890</td>
+                    <td>nehaldoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2024-04-28</td>
+                    <td>ABC1234567</td>
+                    <td>Kemar Doe</td>
+                    <td>1234567890</td>
+                    <td>kemardoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>2024-04-29</td>
+                    <td>ABC1234567</td>
+                    <td>homar Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>Nikolas Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2024-04-26</td>
+                    <td>ABC1234567</td>
+                    <td>John Doe</td>
+                    <td>1234567890</td>
+                    <td>johndoe@example.com</td>
+                    <td>Category A</td>
+                    <td>123456</td>
+                    <td>State A</td>
+                    <td>City A</td>
+                    <td>123 Street, Apt 1</td>
+                    <td>40.7128° N, 74.0060° W</td>
+                    <td>
+                        <button>Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+    <script>
+    new DataTable('#example', {
+        scrollX: true
+    });
+    $('#myTable').DataTable({
+        responsive: true
+    });
+</script>
+    <script>
+    window.onclick = function (event) {
+        var modal = document.getElementById('paymentModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function openFormPage() {
+        console.log("Button clicked");
+        fetch("form.html")
+            .then(response => response.text())
+            .then(html => {
+                document.querySelector('#paymentModal .modal-content').innerHTML = html;
+                document.getElementById('paymentModal').style.display = 'block';
+            })
+            .catch(error => console.error('Error fetching form.html:', error));
+    }
+
+    function closeModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    function togglePaymentFields() {
+        var onlineFields = document.getElementById("onlinePaymentFields");
+        var offlineFields = document.getElementById("offlinePaymentFields");
+        var onlineRadio = document.getElementById("flexCheckOnline");
+
+        if (onlineRadio.checked) {
+            onlineFields.style.display = "block";
+            offlineFields.style.display = "none";
+        } else {
+            onlineFields.style.display = "none";
+            offlineFields.style.display = "block";
+        }
+    }
+</script>
+
+</html>
