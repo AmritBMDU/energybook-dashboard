@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+/*-------------------------------- END ----*/
+    #body-row {
+        margin-left: 0;
+        margin-right: 0;
+        font-family: "Poppins", sans-serif;
+    }
+
+    #sidebar-container {
+        min-height: 100vh;
+        background-color: #132644;
+        padding: 0;
+        /* flex: unset; */
+    }
+    span.menu-collapsed {
+        font-family: "Poppins", sans-serif;
+    }
+   
+    
+    .sidebar-collapsed {
+        /*width: 60px;*/
+        width: 100px;
+    }
+
+    /* ----------| Menu item*/    
+    #sidebar-container .list-group a {
+        height: 50px;
+        color: white;
+    }
+
+    /* ----------| Submenu item*/    
+    #sidebar-container .list-group li.list-group-item {
+        background-color: #132644;
+    }
+    
+    #sidebar-container .list-group .sidebar-submenu a {
+        height: 45px;
+        padding-left: 30px;
+    }
+    
+    .sidebar-submenu {
+        font-size: 0.9rem;
+    }
+
+    /* ----------| Separators */    
+    .sidebar-separator-title {
+        background-color: #132644;
+        height: 35px;
+    }
+    
+    .sidebar-separator {
+        background-color: #132644;
+        height: 25px;
+    }
+    .bg-orange {
+        background: #f17207 !important;
+    } 
+    .bg-dark,.btn-dark {
+        background: #132644 !important;
+    } 
+    .logo-separator {
+        background-color: #132644;
+        height: 60px;
+    }
+    
+    a.bg-dark,.bg-dark {
+        background-color: #132644 !important;
+    }
+    .dashboard-title {
+        font-family: 'Poppins', sans-serif;
+        margin-right: auto;
+    }
+    .dashboard-title h1 {
+        margin-bottom: 0;
+    }
+    .user-card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 270px; /* Adjust width as needed */
+        height: 90px;
+    }
+    .search-input {
+        height: 30px; /* Adjust height as needed */
+    }
+    .notification-icons {
+        color: #045888;
+    }
+    .notification-icons i {
+        font-size: 24px;
+        margin-left: 20px;
+    }
+    .notification-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .list-group a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
+        background-color: #f17207 !important;
+    }
+
+    .no-padding {
+        padding: 0px !important;
+    }
+    .text-blue {
+        color: #132644;
+        font-size: 21px;
+        font-weight: 700;
+    }
